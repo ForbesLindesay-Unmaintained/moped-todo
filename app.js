@@ -1,17 +1,16 @@
 'use strict';
 
-var app = require('moped/applet')();
+var app = require('moped/app')();
 var React = require('react');
 var jade = require('react-jade');
 var uid = require('uid');
 
-var service = require('./service.js');
 
 var index = jade.compileFile(__dirname + '/index.jade');
 var template = jade.compileFile(__dirname + '/view.jade');
 
 var editingTodo;
-var editingText;
+var editingText = '';
 
 var showingStates = {
   ALL_TODOS: 'all',
@@ -54,14 +53,16 @@ Application.prototype.toggle = function (todo) {
 };
 Application.prototype.handleEdit = function (todo) {
   editingTodo = todo;
+  editingText = todo.title;
 
   app.refresh();
 };
 Application.prototype.isEditing = function (todo) {
-  return editingTodo === todo;
+  return editingTodo && editingTodo._id.$oid === todo._id.$oid;
 };
 Application.prototype.handleSubmit = function (todo) {
   var val = editingText.trim();
+  editingTodo = null;
   if (val) {
     this._db.todos.update(todo._id, {title: val});
   } else {
@@ -82,7 +83,7 @@ Application.prototype.getEditText = function (todo) {
   return editingText || todo.title;
 }
 Application.prototype.setEditText = function (todo, e) {
-  var editingText = e.target.value;
+  editingText = e.target.value;
 
   app.refresh();
 }
@@ -117,7 +118,15 @@ function render(app, nowShowing) {
   });
 }
 
-app.use(service);
+var sync = require('moped/sync-service')('db');
+
+if (app.isServer) {
+  var MemoryServer = require('moped-sync/memory-server.js');
+  sync.connection(new MemoryServer());
+}
+
+sync.filter({todos: {}});
+app.use(sync);
 
 app.get('/', function () {
   return index({id: Math.random().toString(35).substr(2, 7)});
