@@ -1,0 +1,22 @@
+{
+  "name": "moped-todomvc",
+  "version": "0.0.0",
+  "description": "A todo app example using moped",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.5.0",
+    "express": "^4.6.1",
+    "jade": "~1.5.0",
+    "moped": "0.0.6",
+    "moped-sync": "0.0.5",
+    "react": "~0.11.0",
+    "react-jade": "0.0.10",
+    "then-request": "0.0.4"
+  }
+}

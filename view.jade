@@ -1,0 +1,38 @@
+header#header
+  h1 todos
+  input#new-todo(placeholder="What needs to be done?" autoFocus onKeyDown=app.handleNewTodoKeyDown())
+if todos.length
+  section#main
+    input#toggle-all(type="checkbox" onChange=app.toggleAll() checked=activeTodoCount === 0)
+    ul#todo-list
+      each todo in shownTodos
+        li(class=[todo.completed ? 'completed' : null, app.isEditing(todo) ? 'editing' : null])
+          .view
+            input.toggle(type="checkbox"
+                         checked=todo.completed
+                         onChange=app.toggle(todo))
+            label(onDoubleClick=app.handleEdit(todo))= todo.title
+            button.destroy(onClick=app.destroy(todo))
+          input.edit(value=app.getEditText(todo)
+                     onBlur=app.handleSubmit(todo)
+                     onChange=app.setEditText(todo))
+if todos.length
+  footer#footer
+    span#todo-count
+      strong= activeTodoCount
+      = activeTodoCount === 1 ? ' item ' : ' items '
+      | left
+    ul#filters
+      li
+        a(href="/" + app.listId() class= nowShowing === showingStates.ALL_TODOS ? 'selected' : null) All
+      = ' '
+      li
+        a(href="/" + app.listId() + "/active" class= nowShowing === showingStates.ACTIVE_TODOS ? 'selected' : null) Active
+      = ' '
+      li
+        a(href="/" + app.listId() + "/completed" class= nowShowing === showingStates.COMPLETED_TODOS ? 'selected' : null) Completed
+    if completedCount
+      button#clear-completed(onClick=app.clearCompleted())
+        | Clear completed (
+        = completedCount
+        | )

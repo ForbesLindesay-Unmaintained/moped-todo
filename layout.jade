@@ -1,0 +1,14 @@
+doctype html
+html(lang="en" data-framework="moped")
+  head
+    meta(charset="utf-8")
+    title Moped • TodoMVC
+    link(rel="stylesheet" href="/todomvc-common/base.css")
+  body
+    section#todoapp!= component
+    footer#info
+    footer#info
+      p Double-click to edit a todo
+      p Created by #[a(href="http://github.com/ForbesLindesay/") ForbesLindesay]
+      p Part of #[a(href="http://todomvc.com") TodoMVC]
+    != client
