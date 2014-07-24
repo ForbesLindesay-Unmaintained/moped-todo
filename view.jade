@@ -1,6 +1,9 @@
 header#header
   h1 todos
-  input#new-todo(placeholder="What needs to be done?" autoFocus onKeyDown=app.handleNewTodoKeyDown())
+  input#new-todo(
+    placeholder="What needs to be done?"
+    autoFocus
+    onKeyDown=app.handleNewTodoKeyDown())
 if todos.length
   section#main
     input#toggle-all(type="checkbox" onChange=app.toggleAll() checked=activeTodoCount === 0)
@@ -24,13 +27,22 @@ if todos.length
       | left
     ul#filters
       li
-        a(href="/" + app.listId() class= nowShowing === showingStates.ALL_TODOS ? 'selected' : null) All
+        a(
+          href="/" + app.listId()
+          class= nowShowing === showingStates.ALL_TODOS ? 'selected' : null
+        ) All
       = ' '
       li
-        a(href="/" + app.listId() + "/active" class= nowShowing === showingStates.ACTIVE_TODOS ? 'selected' : null) Active
+        a(
+          href="/" + app.listId() + "/active"
+          class= nowShowing === showingStates.ACTIVE_TODOS ? 'selected' : null
+        ) Active
       = ' '
       li
-        a(href="/" + app.listId() + "/completed" class= nowShowing === showingStates.COMPLETED_TODOS ? 'selected' : null) Completed
+        a(
+          href="/" + app.listId() + "/completed"
+          class= nowShowing === showingStates.COMPLETED_TODOS ? 'selected' : null
+        ) Completed
     if completedCount
       button#clear-completed(onClick=app.clearCompleted())
         | Clear completed (

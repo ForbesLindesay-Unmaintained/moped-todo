@@ -3,7 +3,6 @@
 var app = require('moped/app')();
 var React = require('react');
 var jade = require('react-jade');
-var uid = require('uid');
 
 
 var index = jade.compileFile(__dirname + '/index.jade');
