@@ -12,11 +12,11 @@
   "dependencies": {
     "body-parser": "^1.5.0",
     "express": "^4.6.1",
-    "jade": "~1.5.0",
-    "moped": "0.0.10",
+    "jade": "~1.11.0",
+    "moped": "0.6.3",
     "moped-sync": "0.0.7",
-    "react": "~0.11.0",
-    "react-jade": "0.0.10",
-    "then-request": "0.0.4"
+    "react": "~15.4.2",
+    "react-jade": "2.5.0",
+    "then-request": "2.2.0"
   }
 }
